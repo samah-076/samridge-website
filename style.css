@@ -440,16 +440,57 @@ p {
 }
 
 
-/* 7. PROJECTS */
+/* 7. PROJECTS / DESIGN SHOWCASE */
 
 .projects {
     background: var(--ivory);
 }
 
+/* CATEGORY FILTERS */
+
+.project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.filter-btn {
+    padding: 10px 19px;
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--gold);
+    color: var(--primary-light);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.filter-btn:focus-visible,
+.project-request:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 4px;
+}
+
+
+/* PROJECT GRID */
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
+    align-items: stretch;
 }
 
 .project-card {
@@ -458,58 +499,77 @@ p {
     border: 1px solid var(--border);
     border-radius: 6px;
     overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(23, 61, 50, 0.1);
+}
+
+/* FILTERED CARDS */
+
+.project-card[hidden] {
+    display: none;
+}
+
+
+/* PROJECT IMAGES */
+
 .project-visual {
+    height: 250px;
     min-height: 250px;
-    padding: 30px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    background: var(--ivory-dark);
 }
 
-.project-visual span {
+.project-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(16, 44, 37, 0.78),
+        rgba(16, 44, 37, 0.05) 75%
+    );
+    z-index: 1;
+}
+
+.project-visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-visual img {
+    transform: scale(1.06);
+}
+
+.project-image-label {
+    position: absolute;
+    bottom: 22px;
+    left: 20px;
+    right: 20px;
+    z-index: 2;
+    color: var(--white);
     font-family: var(--heading-font);
-    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    font-size: 1.3rem;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-.project-visual p {
-    margin-top: 10px;
-    font-size: 0.68rem;
-    letter-spacing: 2px;
-    font-weight: 700;
-}
 
-.fashion-visual {
-    background: #E9DED0;
-    color: #493A30;
-}
-
-.fashion-visual p {
-    color: #715B48;
-}
-
-.restaurant-visual {
-    background: #DDE5D9;
-    color: #294735;
-}
-
-.restaurant-visual p {
-    color: #526D57;
-}
-
-.business-visual {
-    background: #E3E3DC;
-    color: #303A32;
-}
-
-.business-visual p {
-    color: #687266;
-}
+/* PROJECT INFORMATION */
 
 .project-info {
     padding: 25px;
@@ -530,6 +590,21 @@ p {
 
 .project-info p {
     font-size: 0.88rem;
+    margin-bottom: 17px;
+}
+
+.project-request {
+    display: inline-block;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 4px;
+    transition: color 0.2s ease;
+}
+
+.project-request:hover {
+    color: var(--gold);
 }
 
 .projects-note {
@@ -625,6 +700,16 @@ p {
     max-width: 430px;
 }
 
+.contact-email {
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.contact-email a {
+    color: var(--primary);
+    border-bottom: 1px solid var(--gold);
+}
+
 .contact-form {
     width: 100%;
     padding: 40px;
@@ -679,6 +764,31 @@ p {
 }
 
 
+/* PRIVACY CONSENT */
+
+.privacy-consent label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+}
+
+.privacy-consent input[type="checkbox"] {
+    width: auto;
+    min-width: 17px;
+    height: 17px;
+    margin-top: 3px;
+    padding: 0;
+    accent-color: var(--primary);
+}
+
+.privacy-consent small {
+    color: var(--text-light);
+    font-size: 0.76rem;
+    line-height: 1.6;
+}
+
+
 /* 11. FOOTER */
 
 .footer {
@@ -720,8 +830,68 @@ p {
 }
 
 
+/* 12. PRIVACY NOTE */
+
+.privacy-section {
+    padding: 30px 0;
+    background: var(--ivory-dark);
+}
+
+.privacy-section h2 {
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.privacy-section p {
+    max-width: 850px;
+    color: var(--text-light);
+    font-size: 0.82rem;
+}
+
+
+/* LAUNCH STATUS - PRESERVED FOR FUTURE USE */
+
+.launch-status-card {
+    width: 100%;
+    padding: 40px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 6px;
+}
+
+.launch-status-label {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: var(--primary-light);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.launch-status-card h3 {
+    margin-bottom: 14px;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.launch-status-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.launch-status-footnote {
+    display: block;
+    margin-top: 22px;
+    color: var(--primary-light);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+
 /* =========================================
-   12. TABLET RESPONSIVENESS
+   13. TABLET RESPONSIVENESS
 ========================================= */
 
 @media (max-width: 1000px) {
@@ -747,7 +917,8 @@ p {
     }
 
     .projects-grid {
-        gap: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
     }
 
     .project-info {
@@ -761,8 +932,72 @@ p {
 }
 
 
+/* TABLET NAVIGATION FIX */
+
+@media (min-width: 751px) and (max-width: 850px) {
+
+    .nav-container {
+        min-height: 72px;
+    }
+
+    .menu-toggle {
+        display: flex;
+        z-index: 1002;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: var(--ivory);
+        padding: 25px 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: 0.25s ease;
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-links a {
+        padding: 13px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links .nav-contact {
+        text-align: center;
+        margin-top: 15px;
+        padding: 13px;
+        border-bottom: none;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
 /* =========================================
-   13. MOBILE RESPONSIVENESS
+   14. MOBILE RESPONSIVENESS
 ========================================= */
 
 @media (max-width: 750px) {
@@ -916,9 +1151,19 @@ p {
 
     /* PROJECTS */
 
+    .project-filters {
+        gap: 9px;
+        margin-bottom: 28px;
+    }
+
+    .filter-btn {
+        padding: 9px 13px;
+        font-size: 0.78rem;
+    }
+
     .projects-grid {
         grid-template-columns: 1fr;
-        gap: 28px;
+        gap: 25px;
     }
 
     .project-card {
@@ -926,12 +1171,12 @@ p {
     }
 
     .project-visual {
-        min-height: 210px;
-        padding: 25px;
+        height: 230px;
+        min-height: 230px;
     }
 
-    .project-visual span {
-        font-size: 1.55rem;
+    .project-image-label {
+        font-size: 1.2rem;
     }
 
     .project-info {
@@ -999,11 +1244,15 @@ p {
         gap: 10px;
     }
 
+    .launch-status-card {
+        padding: 28px 22px;
+    }
+
 }
 
 
 /* =========================================
-   14. SMALL MOBILE SCREENS
+   15. SMALL MOBILE SCREENS
 ========================================= */
 
 @media (max-width: 480px) {
@@ -1047,7 +1296,8 @@ p {
     }
 
     .project-visual {
-        min-height: 190px;
+        height: 205px;
+        min-height: 205px;
     }
 
     .contact-form {
@@ -1062,7 +1312,7 @@ p {
 
 
 /* =========================================
-   15. ACCESSIBILITY
+   16. ACCESSIBILITY
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1079,67 +1329,4 @@ p {
         animation-iteration-count: 1 !important;
     }
 
-}
-
-
-/* LAUNCH STATUS AND PRIVACY NOTE */
-
-.launch-status-card {
-    width: 100%;
-    padding: 40px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--gold);
-    border-radius: 6px;
-}
-
-.launch-status-label {
-    display: inline-block;
-    margin-bottom: 14px;
-    color: var(--primary-light);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-
-.launch-status-card h3 {
-    margin-bottom: 14px;
-    color: var(--primary);
-    font-size: 1.5rem;
-}
-
-.launch-status-card p {
-    color: var(--text-light);
-    font-size: 0.95rem;
-}
-
-.launch-status-footnote {
-    display: block;
-    margin-top: 22px;
-    color: var(--primary-light);
-    font-size: 0.82rem;
-    font-weight: 600;
-}
-
-.privacy-section {
-    padding: 30px 0;
-    background: var(--ivory-dark);
-}
-
-.privacy-section h2 {
-    margin-bottom: 8px;
-    color: var(--primary);
-    font-size: 1rem;
-}
-
-.privacy-section p {
-    max-width: 850px;
-    color: var(--text-light);
-    font-size: 0.82rem;
-}
-
-@media (max-width: 750px) {
-    .launch-status-card {
-        padding: 28px 22px;
-    }
 }
