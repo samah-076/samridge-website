@@ -1,4 +1,3 @@
-
 // =========================================
 // SAMRIDGE - JAVASCRIPT
 // Navigation and website interactions
@@ -64,7 +63,7 @@ if (yearElement) {
 
 
 
-// 3. PORTFOLIO CATEGORY FILTERS
+// 3. PORTFOLIO CATEGORY FILTERS (Designs page)
 
 const filterButtons = document.querySelectorAll(".filter-btn");
 const projectCards = document.querySelectorAll(".project-card");
@@ -101,9 +100,8 @@ filterButtons.forEach((button) => {
 
 
 
-// 4. REQUEST A SIMILAR DESIGN
+// 4. PRE-FILL CONTACT FORM FROM "REQUEST A SIMILAR DESIGN"
 
-const projectRequests = document.querySelectorAll(".project-request");
 const projectType = document.querySelector("#project-type");
 const messageField = document.querySelector("#message");
 
@@ -120,32 +118,22 @@ const designOptions = {
 
 };
 
-projectRequests.forEach((link) => {
+if (projectType && messageField) {
 
-    link.addEventListener("click", () => {
+    const params = new URLSearchParams(window.location.search);
+    const design = params.get("design");
 
-        const design = link.dataset.design;
+    if (design) {
+
         const selectedOption = designOptions[design];
 
-        if (projectType && selectedOption) {
+        if (selectedOption) {
             projectType.value = selectedOption;
         }
 
-        if (messageField && design) {
+        messageField.value =
+            `I'm interested in a design similar to the ${design} concept.`;
 
-            const requestMessage =
-                `I'm interested in a design similar to the ${design} concept.`;
+    }
 
-            if (!messageField.value.includes(requestMessage)) {
-
-                messageField.value = messageField.value.trim()
-                    ? `${messageField.value.trim()}\n\n${requestMessage}`
-                    : requestMessage;
-
-            }
-
-        }
-
-    });
-
-});
+}
