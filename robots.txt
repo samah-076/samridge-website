@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://samah-076.github.io/samridge-website/sitemap.xml
