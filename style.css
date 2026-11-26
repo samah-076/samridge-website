@@ -1741,7 +1741,10 @@ p {
 }
 
 /* Keep gold on dark green sections */
-.philosophy .eyebrow {
+.philosophy .eyebrow,
+.hero .eyebrow,
+.page-hero .eyebrow,
+.cta-banner .eyebrow {
     color: var(--gold-light);
 }
 
@@ -1797,4 +1800,4 @@ textarea:focus-visible {
     color: var(--primary);
     text-decoration: underline;
 }
-  
+   
