@@ -135,7 +135,12 @@ if (projectType && messageField) {
             `I'm interested in a design similar to the ${design} concept.`;
 
     }
-    // 5. FOOTER LEGAL LINKS
+
+}
+
+
+
+// 5. FOOTER LEGAL LINKS
 
 const footerBottom = document.querySelector(".footer-bottom");
 
@@ -159,7 +164,7 @@ if (footerBottom) {
 
 }
 
-}
+
 
 // 6. SOCIAL LINKS
 
@@ -192,3 +197,92 @@ if (footerLinks) {
 
 
 
+// 7. SKIP TO MAIN CONTENT LINK
+
+const mainElement = document.querySelector("main");
+
+if (mainElement && !document.querySelector(".skip-link")) {
+
+    if (!mainElement.id) {
+        mainElement.id = "main";
+    }
+
+    mainElement.setAttribute("tabindex", "-1");
+
+    const skipLink = document.createElement("a");
+    skipLink.href = "#" + mainElement.id;
+    skipLink.className = "skip-link";
+    skipLink.textContent = "Skip to main content";
+
+    document.body.insertBefore(skipLink, document.body.firstChild);
+
+}
+
+
+
+// 8. CONTACT FORM: SENDING, SUCCESS AND ERROR MESSAGES
+
+const contactForm = document.querySelector("#contact-form");
+
+if (contactForm) {
+
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+
+    const statusBox = document.createElement("div");
+    statusBox.className = "form-status";
+    statusBox.setAttribute("role", "status");
+    statusBox.setAttribute("aria-live", "polite");
+    statusBox.tabIndex = -1;
+    contactForm.appendChild(statusBox);
+
+    contactForm.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        if (!contactForm.checkValidity()) {
+            contactForm.reportValidity();
+            return;
+        }
+
+        const originalLabel = submitButton.textContent;
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+        statusBox.className = "form-status";
+        statusBox.textContent = "";
+
+        try {
+
+            const response = await fetch(contactForm.action, {
+                method: "POST",
+                body: new FormData(contactForm),
+                headers: { Accept: "application/json" }
+            });
+
+            if (!response.ok) {
+                throw new Error("Request failed");
+            }
+
+            contactForm.reset();
+            statusBox.className = "form-status success";
+            statusBox.textContent =
+                "Thank you! Your message has been sent. We'll reply by email as soon as we can.";
+
+        } catch (error) {
+
+            statusBox.className = "form-status error";
+            statusBox.innerHTML =
+                'Sorry, your message could not be sent. Please try again, email ' +
+                '<a href="mailto:contact.samridge@gmail.com">contact.samridge@gmail.com</a>' +
+                ' or message us on ' +
+                '<a href="https://wa.me/2349167930217" target="_blank" rel="noopener">WhatsApp</a>.';
+
+        }
+
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+        statusBox.focus();
+
+    });
+
+}
