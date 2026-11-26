@@ -1802,4 +1802,71 @@ textarea:focus-visible {
     color: var(--primary);
     text-decoration: underline;
 }
+
+
+
+/* =========================================
+   19. SKIP LINK & FORM MESSAGES
+========================================= */
+
+.skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 2000;
+    background: var(--primary);
+    color: var(--white);
+    padding: 12px 18px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.skip-link:focus {
+    top: 16px;
+    outline: 3px solid var(--gold-light);
+}
+
+main:focus {
+    outline: none;
+}
+
+.form-status {
+    display: none;
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.form-status:focus {
+    outline: none;
+}
+
+.form-status.success,
+.form-status.error {
+    display: block;
+}
+
+.form-status.success {
+    background: #E4F0EA;
+    color: #14392D;
+    border: 1px solid #9CC4B1;
+}
+
+.form-status.error {
+    background: #FBE9E9;
+    color: #7A1F1F;
+    border: 1px solid #E0A8A8;
+}
+
+.form-status a {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.form-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
    
