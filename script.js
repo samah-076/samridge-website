@@ -165,14 +165,30 @@ if (footerBottom) {
 
 const footerLinks = document.querySelector(".footer-links");
 
-if (footerLinks && !footerLinks.querySelector('a[href*="x.com"]')) {
+if (footerLinks) {
 
-    const xLink = document.createElement("a");
-    xLink.href = "https://x.com/samridge_";
-    xLink.textContent = "Follow on X";
-    xLink.target = "_blank";
-    xLink.rel = "noopener";
-    xLink.setAttribute("aria-label", "Follow SAMRIDGE on X (opens in a new tab)");
-    footerLinks.appendChild(xLink);
+    const socials = [
+        { label: "Follow on X", url: "https://x.com/samridge_", name: "X" },
+        { label: "Instagram", url: "https://www.instagram.com/samridge/", name: "Instagram" }
+    ];
+
+    socials.forEach((item) => {
+
+        if (!footerLinks.querySelector(`a[href="${item.url}"]`)) {
+
+            const link = document.createElement("a");
+            link.href = item.url;
+            link.textContent = item.label;
+            link.target = "_blank";
+            link.rel = "noopener";
+            link.setAttribute("aria-label", `SAMRIDGE on ${item.name} (opens in a new tab)`);
+            footerLinks.appendChild(link);
+
+        }
+
+    });
 
 }
+
+
+
