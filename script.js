@@ -135,5 +135,28 @@ if (projectType && messageField) {
             `I'm interested in a design similar to the ${design} concept.`;
 
     }
+    // 5. FOOTER LEGAL LINKS
+
+const footerBottom = document.querySelector(".footer-bottom");
+
+if (footerBottom) {
+
+    const privacyLink = footerBottom.querySelector("a");
+
+    if (privacyLink) {
+        privacyLink.textContent = "Privacy Policy";
+        privacyLink.setAttribute("href", "privacy.html");
+    }
+
+    if (!footerBottom.querySelector('a[href="terms.html"]')) {
+
+        const termsLink = document.createElement("a");
+        termsLink.href = "terms.html";
+        termsLink.textContent = "Terms & Conditions";
+        footerBottom.appendChild(termsLink);
+
+    }
+
+}
 
 }
