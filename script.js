@@ -160,3 +160,19 @@ if (footerBottom) {
 }
 
 }
+
+// 6. SOCIAL LINKS
+
+const footerLinks = document.querySelector(".footer-links");
+
+if (footerLinks && !footerLinks.querySelector('a[href*="x.com"]')) {
+
+    const xLink = document.createElement("a");
+    xLink.href = "https://x.com/samridge_";
+    xLink.textContent = "Follow on X";
+    xLink.target = "_blank";
+    xLink.rel = "noopener";
+    xLink.setAttribute("aria-label", "Follow SAMRIDGE on X (opens in a new tab)");
+    footerLinks.appendChild(xLink);
+
+}
