@@ -1869,4 +1869,40 @@ main:focus {
     opacity: 0.7;
     cursor: not-allowed;
 }
+
+
+/* =========================================
+   20. ACCENT COLOUR
+========================================= */
+
+:root {
+    --accent: #B5472E;
+    --accent-dark: #9E3B24;
+}
+
+.nav-links .nav-contact {
+    background: var(--accent);
+    color: var(--white);
+}
+
+.nav-links .nav-contact:hover {
+    background: var(--accent-dark);
+    color: var(--white);
+}
+
+.contact-form .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+}
+
+.contact-form .btn-primary:hover {
+    background: var(--accent-dark);
+    color: var(--white);
+}
+
+.text-link,
+.project-request,
+.contact-email a {
+    border-bottom-color: var(--accent);
+}
    
